@@ -2,7 +2,7 @@
   "schedule_entry": [
     {
       "cycle": "DAM2",
-      "pack": "PACK3 (198h)",
+      "pack": "PACK3",
       "days": {
         "monday": 0,
         "tuesday": 2,
@@ -37,7 +37,7 @@
         },
         {
           "module": "M08",
-          "name": "UF3",
+          "name": "UF2",
           "description": "Desenvolupament de jocs per a dispositius mòbils",
           "hours": "30"
         }
@@ -45,7 +45,7 @@
     },
     {
       "cycle": "ASIX1",
-      "pack": "PACKX (132h)",
+      "pack": "PACK3",
       "days": {
         "monday": 0,
         "tuesday": 0,
@@ -70,44 +70,13 @@
           "module": "M04",
           "name": "UF3",
           "description": "Sistemes de gestió empresarial",
-          "hours": "23"
+          "hours": "27"
         },
         {
           "module": "M09",
           "name": "UF1",
           "description": "Llenguatges de guions de servidors (PHP)",
           "hours": "33"
-        }
-      ]
-    },
-    {
-      "cycle": "DAM2",
-      "pack": "Projecte (279)",
-      "days": {
-        "monday": 5,
-        "tuesday": 0,
-        "wednesday": 4,
-        "thursday": 0,
-        "friday": 0
-      },
-      "ufs": [
-        {
-          "module": "Projecte",
-          "name": "PR1",
-          "description": "Projecte Android",
-          "hours": "180"
-        },
-        {
-          "module": "Projecte",
-          "name": "PR2",
-          "description": "M05 + ERP",
-          "hours": "63"
-        },
-        {
-          "module": "Projecte",
-          "name": "PR3",
-          "description": "Projecte Unity",
-          "hours": "36"
         }
       ]
     }

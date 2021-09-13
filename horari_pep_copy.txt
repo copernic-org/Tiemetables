@@ -1,0 +1,25 @@
+DAM2 PACK3 dimarts 2h. dijous 3h. divendres 2h. 
+[M07 UF1 'Disseny i implementació d'interfícies' 79h., M08 UF1 'Desenvolupament d'aplicacions per a dispositius mòbils' 45h., M08 UF2 'Programació multimèdia' 24h., M07 UF2 'Preparació i distribució d'aplicacions' 20h., M08 UF2 'Desenvolupament de jocs per a dispositius mòbils' 30h.] 
+M07 UF1 'Disseny i implementació d'interfícies' 79h.
+De dilluns 20/09/2021 fins divendres 10/12/2021
+M08 UF1 'Desenvolupament d'aplicacions per a dispositius mòbils' 45h.
+De divendres 10/12/2021 fins divendres 11/02/2022
+M08 UF2 'Programació multimèdia' 24h.
+De divendres 11/02/2022 fins dijous 10/03/2022
+M07 UF2 'Preparació i distribució d'aplicacions' 20h.
+De dijous 10/03/2022 fins dimarts 29/03/2022
+M08 UF2 'Desenvolupament de jocs per a dispositius mòbils' 30h.
+De dimarts 29/03/2022 fins divendres 06/05/2022
+******
+ASIX1 PACK3 dimecres 1h. dijous 1h. divendres 2h. 
+[M04 UF1 'Programació amb XML' 45h., M04 UF2 'Àmbits d'aplicació de l’XML' 27h., M04 UF3 'Sistemes de gestió empresarial' 27h., M09 UF1 'Llenguatges de guions de servidors (PHP)' 33h.] 
+M04 UF1 'Programació amb XML' 45h.
+De dilluns 20/09/2021 fins dijous 09/12/2021
+M04 UF2 'Àmbits d'aplicació de l’XML' 27h.
+De dijous 09/12/2021 fins divendres 11/02/2022
+M04 UF3 'Sistemes de gestió empresarial' 27h.
+De divendres 11/02/2022 fins dimecres 30/03/2022
+M09 UF1 'Llenguatges de guions de servidors (PHP)' 33h.
+De dimecres 30/03/2022 fins dijous 09/06/2022
+*** ASIX1: la UF1 de M09 acaba 2 dies després del final de les classes lectives 07/06/2022 ***
+******

@@ -22,24 +22,6 @@
           "name": "UF1",
           "description": "Desenvolupament d'aplicacions per a dispositius mòbils",
           "hours": "45"
-        },
-        {
-          "module": "M08",
-          "name": "UF2",
-          "description": "Programació multimèdia",
-          "hours": "24"
-        },
-        {
-          "module": "M07",
-          "name": "UF2",
-          "description": "Preparació i distribució d'aplicacions",
-          "hours": "20"
-        },
-        {
-          "module": "M08",
-          "name": "UF3",
-          "description": "Desenvolupament de jocs per a dispositius mòbils",
-          "hours": "30"
         }
       ]
     },
@@ -65,18 +47,6 @@
           "name": "UF2",
           "description": "Àmbits d'aplicació de l’XML",
           "hours": "27"
-        },
-        {
-          "module": "M04",
-          "name": "UF3",
-          "description": "Sistemes de gestió empresarial",
-          "hours": "23"
-        },
-        {
-          "module": "M09",
-          "name": "UF1",
-          "description": "Llenguatges de guions de servidors (PHP)",
-          "hours": "33"
         }
       ]
     },
