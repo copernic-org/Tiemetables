@@ -1,0 +1,21 @@
+ScheduleEntry(cycle=DAM2, pack=PACK3, day=Day(monday=0, tuesday=2, wednesday=0, thursday=3, friday=2), ufs=[UF(module=M07, name=UF1, description=Disseny i implementació d'interfícies, hours=79), UF(module=M08, name=UF1, description=Desenvolupament d'aplicacions per a dispositius mòbils, hours=45), UF(module=M08, name=UF2, description=Programació multimèdia, hours=24), UF(module=M07, name=UF2, description=Preparació i distribució d'aplicacions, hours=20), UF(module=M08, name=UF2, description=Desenvolupament de jocs per a dispositius mòbils, hours=30)])
+UF(module=M07, name=UF1, description=Disseny i implementació d'interfícies, hours=79)
+20/09/2021 - 11/12/2021
+UF(module=M08, name=UF1, description=Desenvolupament d'aplicacions per a dispositius mòbils, hours=45)
+11/12/2021 - 16/02/2022
+UF(module=M08, name=UF2, description=Programació multimèdia, hours=24)
+16/02/2022 - 12/03/2022
+UF(module=M07, name=UF2, description=Preparació i distribució d'aplicacions, hours=20)
+12/03/2022 - 02/04/2022
+UF(module=M08, name=UF2, description=Desenvolupament de jocs per a dispositius mòbils, hours=30)
+02/04/2022 - 14/05/2022
+ScheduleEntry(cycle=ASIX1, pack=PACK3, day=Day(monday=0, tuesday=0, wednesday=1, thursday=1, friday=2), ufs=[UF(module=M04, name=UF1, description=Programació amb XML, hours=45), UF(module=M04, name=UF2, description=Àmbits d'aplicació de l’XML, hours=27), UF(module=M04, name=UF3, description=Sistemes de gestió empresarial, hours=27), UF(module=M09, name=UF1, description=Llenguatges de guions de servidors (PHP), hours=33)])
+UF(module=M04, name=UF1, description=Programació amb XML, hours=45)
+20/09/2021 - 10/12/2021
+UF(module=M04, name=UF2, description=Àmbits d'aplicació de l’XML, hours=27)
+10/12/2021 - 12/02/2022
+UF(module=M04, name=UF3, description=Sistemes de gestió empresarial, hours=27)
+12/02/2022 - 02/04/2022
+UF(module=M09, name=UF1, description=Llenguatges de guions de servidors (PHP), hours=33)
+02/04/2022 - 17/06/2022
+*** ASIX1: la UF1 de M09 acaba 10 dies després del final de les classes lectives 07/06/2022 ***

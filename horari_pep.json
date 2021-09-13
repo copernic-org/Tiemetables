@@ -1,0 +1,84 @@
+{
+  "schedule_entry": [
+    {
+      "cycle": "DAM2",
+      "pack": "PACK3",
+      "days": {
+        "monday": 0,
+        "tuesday": 2,
+        "wednesday": 0,
+        "thursday": 3,
+        "friday": 2
+      },
+      "ufs": [
+        {
+          "module": "M07",
+          "name": "UF1",
+          "description": "Disseny i implementació d'interfícies",
+          "hours": "79"
+        },
+        {
+          "module": "M08",
+          "name": "UF1",
+          "description": "Desenvolupament d'aplicacions per a dispositius mòbils",
+          "hours": "45"
+        },
+        {
+          "module": "M08",
+          "name": "UF2",
+          "description": "Programació multimèdia",
+          "hours": "24"
+        },
+        {
+          "module": "M07",
+          "name": "UF2",
+          "description": "Preparació i distribució d'aplicacions",
+          "hours": "20"
+        },
+        {
+          "module": "M08",
+          "name": "UF2",
+          "description": "Desenvolupament de jocs per a dispositius mòbils",
+          "hours": "30"
+        }
+      ]
+    },
+    {
+      "cycle": "ASIX1",
+      "pack": "PACK3",
+      "days": {
+        "monday": 0,
+        "tuesday": 0,
+        "wednesday": 1,
+        "thursday": 1,
+        "friday": 2
+      },
+      "ufs": [
+        {
+          "module": "M04",
+          "name": "UF1",
+          "description": "Programació amb XML",
+          "hours": "45"
+        },
+        {
+          "module": "M04",
+          "name": "UF2",
+          "description": "Àmbits d'aplicació de l’XML",
+          "hours": "27"
+        },
+        {
+          "module": "M04",
+          "name": "UF3",
+          "description": "Sistemes de gestió empresarial",
+          "hours": "27"
+        },
+        {
+          "module": "M09",
+          "name": "UF1",
+          "description": "Llenguatges de guions de servidors (PHP)",
+          "hours": "33"
+        }
+      ]
+    }
+  ]
+}
