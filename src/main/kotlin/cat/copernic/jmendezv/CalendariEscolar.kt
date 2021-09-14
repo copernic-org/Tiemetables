@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter
 data class CalendariEscolar(val dataIniciStr: String, val dataFinalStr: String,
 val fitxerNotLectius: String, val horariJson: String, val output: String) {
     private val NO_LECTIUS = mutableListOf<LocalDate>()
-    private val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    private val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
     val dataInici: LocalDate = LocalDate.parse(dataIniciStr, formatter)
     val dataFinal: LocalDate = LocalDate.parse(dataFinalStr, formatter)
 
@@ -181,8 +181,8 @@ val fitxerNotLectius: String, val horariJson: String, val output: String) {
 
 fun main(args: Array<String>) {
     CalendariEscolar(
-        "20/09/2021",
-        "07/06/2022",
+        "20-09-2021",
+        "07-06-2022",
         "no_lectius.dat",
         "horari_pep.json",
         "horari_pep.txt")
