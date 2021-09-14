@@ -53,5 +53,4 @@ data class ScheduleEntry(@SerializedName("cycle") var cycle: String = "",
     }
 }
 
-
 data class Schedule(@SerializedName("schedule_entry") val scheduleEntries: List<ScheduleEntry> = listOf())

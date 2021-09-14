@@ -7,34 +7,36 @@ import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-//import kotlinx.serialization.json.*
-//import kotlinx.serialization.*
-//import kotlinx.serialization.protobuf.*
-
-data class CalendariEscolar(val dataInici: LocalDate, val dataFinal: LocalDate) {
-    val NO_LECTIUS = mutableListOf<LocalDate>()
+data class CalendariEscolar(val dataIniciStr: String, val dataFinalStr: String,
+val fitxerNotLectius: String, val horariJson: String, val output: String) {
+    private val NO_LECTIUS = mutableListOf<LocalDate>()
+    private val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    val dataInici: LocalDate = LocalDate.parse(dataIniciStr, formatter)
+    val dataFinal: LocalDate = LocalDate.parse(dataFinalStr, formatter)
 
     init {
         carregaNoLectius()
+        val schedule = parseHorari()
+        calculaDatesInicialsFinal(schedule)
+        writeSchedule(schedule, output)
     }
 
-    private fun carregaNoLectius(festius: String = "no_lectius.dat") {
-        val path = Paths.get(festius)
+    // En principi es el mateix per tots els cicles
+    private fun carregaNoLectius() {
+        val path = Paths.get(fitxerNotLectius)
         if (!Files.exists(path)) {
-            throw IllegalArgumentException("Missing fitxer $festius!!!")
+            throw IllegalArgumentException("Missing fitxer $fitxerNotLectius!!!")
         }
-        val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-        //var date = LocalDate.parse("31/12/2018", formatter)
         Files.readAllLines(path).forEach {
             NO_LECTIUS += LocalDate.parse(it, formatter)
         }
     }
 
-    fun LocalDate.isWeekend() = this.dayOfWeek == DayOfWeek.SATURDAY || this.dayOfWeek == DayOfWeek.SUNDAY
+    private fun LocalDate.isWeekend() = this.dayOfWeek == DayOfWeek.SATURDAY || this.dayOfWeek == DayOfWeek.SUNDAY
 
-    fun LocalDate.noHiHaDocencia() = (this in NO_LECTIUS || this.isWeekend())
+    private fun LocalDate.noHiHaDocencia() = (this in NO_LECTIUS || this.isWeekend())
 
-    fun LocalDate.diaDeLaSetmana() = when (dayOfWeek) {
+    private fun LocalDate.diaDeLaSetmana() = when (dayOfWeek) {
         DayOfWeek.MONDAY -> "dilluns"
         DayOfWeek.TUESDAY -> "dimarts"
         DayOfWeek.WEDNESDAY -> "dimecres"
@@ -45,7 +47,7 @@ data class CalendariEscolar(val dataInici: LocalDate, val dataFinal: LocalDate) 
     }
 
     // Retrona un triple perque la data d'inici pot no ser lectiva per a aquesta uf
-    fun calculaIniciFinal(
+    private fun calculaIniciFinalUf(
         inici: LocalDate = dataInici,
         horesPerFer: Int,
         horesDl: Int = 0,
@@ -57,55 +59,27 @@ data class CalendariEscolar(val dataInici: LocalDate, val dataFinal: LocalDate) 
 //        val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
         var dataActual = inici
         var totalHores = 0
+
         // busquen el primer dia de clase a partir de la data inici
         while(dataActual.noHiHaDocencia()) dataActual = dataActual.plusDays(1)
         var dataRealInici = dataActual
+
         do {
             when (dataRealInici.dayOfWeek) {
-                DayOfWeek.MONDAY -> {
-                    if (horesDl == 0) {
-                        dataRealInici = dataRealInici.plusDays(1)
-                    } else {
-                        break
-                    }
-                }
-                DayOfWeek.TUESDAY -> {
-                    if (horesDm == 0) {
-                        dataRealInici = dataRealInici.plusDays(1)
-                    } else {
-                        break
-                    }
-                }
-                DayOfWeek.WEDNESDAY -> {
-                    if (horesDx == 0) {
-                        dataRealInici = dataRealInici.plusDays(1)
-                    } else {
-                        break
-                    }
-                }
-                DayOfWeek.THURSDAY -> {
-                    if (horesDj == 0) {
-                        dataRealInici = dataRealInici.plusDays(1)
-                    } else {
-                        break
-                    }
-                }
-                DayOfWeek.FRIDAY -> {
-                    if (horesDv == 0) {
-                        dataRealInici = dataRealInici.plusDays(1)
-                    } else {
-                        break
-                    }
-                }
+                DayOfWeek.MONDAY -> if (horesDl != 0) break
+                DayOfWeek.TUESDAY -> if (horesDm != 0) break
+                DayOfWeek.WEDNESDAY -> if (horesDx != 0) break
+                DayOfWeek.THURSDAY -> if (horesDj != 0) break
+                DayOfWeek.FRIDAY -> if (horesDv != 0) break
             }
-        } while(true)
+            dataRealInici = dataRealInici.plusDays(1)
+        } while(dataRealInici.isBefore(dataFinal))
 
         while (totalHores < horesPerFer) {
 
-            if (dataActual.noHiHaDocencia()) {
+            while (dataActual.noHiHaDocencia())
                 dataActual = dataActual.plusDays(1)
-                continue
-            }
+
             when (dataActual.dayOfWeek) {
                 DayOfWeek.MONDAY -> totalHores += horesDl
                 DayOfWeek.TUESDAY -> totalHores += horesDm
@@ -116,12 +90,11 @@ data class CalendariEscolar(val dataInici: LocalDate, val dataFinal: LocalDate) 
             dataActual = dataActual.plusDays(1)
 
         }
-//        println(totalHores)
+        // data inici, data final, total hores acumulades
         return Triple(dataRealInici, dataActual.minusDays(1), totalHores)
     }
 
-    fun calculaDatesInicialsFinal(schedule: Schedule): Unit {
-        val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    private fun calculaDatesInicialsFinal(schedule: Schedule): Unit {
 
         schedule.scheduleEntries.forEach { entry ->
             var di: LocalDate = dataInici
@@ -133,7 +106,7 @@ data class CalendariEscolar(val dataInici: LocalDate, val dataFinal: LocalDate) 
             var horesAcumulades = 0
             ufs.forEach { uf ->
                 val hours = uf.hours - horesAcumulades
-                val triple = calculaIniciFinal(di,
+                val triple = calculaIniciFinalUf(di,
                     hours,
                     day.monday,
                     day.tuesday,
@@ -158,25 +131,20 @@ data class CalendariEscolar(val dataInici: LocalDate, val dataFinal: LocalDate) 
                     di = df
                     horesAcumulades = triple.third - hours
                 }
-//                println(uf)
-//                println("${formatter.format(uf.dataInici)} ${formatter.format(uf.dataFinal)}")
 
             }
         }
-        //return schedule
     }
 
-    fun parseHorari(horari: String = "horari_pep.json"): Schedule {
+    private fun parseHorari(): Schedule {
 
-        val path = Paths.get(horari)
+        val path = Paths.get(horariJson)
         if (!Files.exists(path)) {
-            throw IllegalArgumentException("Missing fitxer $horari!!!")
+            throw IllegalArgumentException("Missing fitxer $horariJson!!!")
         }
         val gson = GsonBuilder().apply {
             setPrettyPrinting()
         }.create()
-        val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-        //var date = LocalDate.parse("31/12/2018", formatter)
         val jsonString: String = String(Files.readAllBytes(path))
         // json as array should be:
 //        val sType = object : TypeToken<List<Schedule>>() { }.type
@@ -185,27 +153,18 @@ data class CalendariEscolar(val dataInici: LocalDate, val dataFinal: LocalDate) 
         return gson.fromJson(jsonString, Schedule::class.java)
     }
 
-    fun writeSchedule(schedule: Schedule, filename: String): Unit {
-        val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    fun writeSchedule(schedule: Schedule, output: String): Unit {
         val buffer = StringBuilder()
 
         schedule.scheduleEntries.forEach { entry ->
-//            println("$entry")
-//            Files.write(path, entry.toString().toByteArray())
             buffer.append(entry.toString()).append("\n")
             entry.ufs.forEach { uf ->
-//                println(uf)
-//                Files.write(path, uf.toString().toByteArray())
                 buffer.append(uf.toString()).append("\n")
-//                println("${formatter.format(uf.dataInici)} - ${formatter.format(uf.dataFinal)}")
-//                Files.write(path, "Data d'inici: ${formatter.format(uf.dataInici)} Data final: ${formatter.format(uf.dataFinal)}".toByteArray())
                 buffer.append("De ${uf.dataInici.diaDeLaSetmana()} ${formatter.format(uf.dataInici)} fins ${uf.dataFinal.diaDeLaSetmana()} ${
                     formatter.format(uf.dataFinal)
                 }").append("\n")
                 if (uf.dataFinal.isAfter(dataFinal)) {
                     val periode = dataFinal.until(uf.dataFinal)
-//                    println("*** ${entry.cycle}: la ${uf.name} de ${uf.module} acaba ${periode.days} dies després del final de les classes lectives ${formatter.format(dataFinal)} ***")
-//                    Files.write(path, "*** ${entry.cycle}: la ${uf.name} de ${uf.module} acaba ${periode.days} dies després del final de les classes lectives ${formatter.format(dataFinal)} ***".toByteArray())
                     buffer.append("*** ${entry.cycle}: la ${uf.name} de ${uf.module} acaba ${periode.days} dies després del final de les classes lectives ${
                         formatter.format(dataFinal)
                     } ***").append("\n")
@@ -213,33 +172,20 @@ data class CalendariEscolar(val dataInici: LocalDate, val dataFinal: LocalDate) 
             }
             buffer.append("******\n")
         }
-        Files.deleteIfExists(Paths.get(filename))
-        val path = Files.createFile(Paths.get(filename))
+        Files.deleteIfExists(Paths.get(output))
+        val path = Files.createFile(Paths.get(output))
         Files.write(path, buffer.toString().toByteArray())
     }
-
 
 }
 
 fun main(args: Array<String>) {
-    val calendariEscolar = CalendariEscolar(LocalDate.of(2021, 9, 20),
-        LocalDate.of(2022, 6, 7))
-
-    val schedule = calendariEscolar.parseHorari()
-//    println(schedule)
-    calendariEscolar.calculaDatesInicialsFinal(schedule)
-    calendariEscolar.writeSchedule(schedule, "horari_pep.txt")
+    CalendariEscolar(
+        "20/09/2021",
+        "07/06/2022",
+        "no_lectius.dat",
+        "horari_pep.json",
+        "horari_pep.txt")
     println("Horari generat")
-
-//    schedule[0].ufs[0].dataFinal = LocalDate.now()
-//    println(schedule.scheduleEntries[0])
-//    println(schedule.scheduleEntries[1])
-
-
-//    val dataFinalM07UF1 = calendariEscolar.calculaFinal(LocalDate.of(2021, 9, 20),
-//        99, horesDm = 2, horesDj = 3, horesDv = 2)
-//    var formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-//    println("${formatter.format(dataFinalM07UF1.first)} ${dataFinalM07UF1.second}")
-
 
 }
