@@ -5,6 +5,7 @@ import java.nio.file.Files
 import java.nio.file.Paths
 import java.time.DayOfWeek
 import java.time.LocalDate
+import java.time.Month
 import java.time.format.DateTimeFormatter
 
 object CalendariEscolar {
@@ -57,6 +58,11 @@ object CalendariEscolar {
         DayOfWeek.SATURDAY -> "dissabte"
         DayOfWeek.SUNDAY -> "diumenge"
     }
+
+    private fun LocalDate.cursActual() =
+        if (month > Month.AUGUST) "${year}-${(year + 1).toString().substring(2, 4)}" else "${year - 1}-${
+            year.toString().substring(2, 4)
+        }"
 
     // Retrona un triple perque la data d'inici pot no ser lectiva per a aquesta uf
     private fun calculaIniciFinalUf(
@@ -165,16 +171,18 @@ object CalendariEscolar {
         return gson.fromJson(jsonString, Schedule::class.java)
     }
 
-    fun writeSchedule(schedule: Schedule): Unit {
+    private fun writeSchedule(schedule: Schedule): Unit {
         val buffer = StringBuilder()
 
+        buffer.append("CURS ${LocalDate.now().cursActual()}\n").append("============\n\n")
+        buffer.append("Docent: ${horariJson.substring(horariJson.indexOf("_") + 1, horariJson.indexOf(".")).capitalize()}\n\n")
         schedule.scheduleEntries.forEach { entry ->
-            buffer.append(entry.toString()).append("\n")
+            buffer.append(entry.toString()).append("\n\n")
             entry.ufs.forEach { uf ->
                 buffer.append(uf.toString()).append("\n")
-                buffer.append("De ${uf.dataInici.diaDeLaSetmana()} ${formatter.format(uf.dataInici)} fins ${uf.dataFinal.diaDeLaSetmana()} ${
+                buffer.append("\tDe ${uf.dataInici.diaDeLaSetmana()} ${formatter.format(uf.dataInici)} a ${uf.dataFinal.diaDeLaSetmana()} ${
                     formatter.format(uf.dataFinal)
-                }").append("\n")
+                }").append("\n\n")
                 if (uf.dataFinal.isAfter(dataFinal)) {
                     val periode = dataFinal.until(uf.dataFinal)
                     buffer.append("*** ${entry.cycle}: la ${uf.name} de ${uf.module} acaba ${periode.days} dies després del final de les classes lectives ${
@@ -182,8 +190,9 @@ object CalendariEscolar {
                     } ***").append("\n")
                 }
             }
-            buffer.append("******\n")
+            buffer.append("******\n\n")
         }
+        buffer.append("[EOF]\n")
         Files.deleteIfExists(Paths.get(output))
         val path = Files.createFile(Paths.get(output))
         Files.write(path, buffer.toString().toByteArray())
