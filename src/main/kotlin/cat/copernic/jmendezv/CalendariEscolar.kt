@@ -7,25 +7,37 @@ import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-data class CalendariEscolar(val dataIniciStr: String, val dataFinalStr: String,
-val fitxerNotLectius: String, val horariJson: String, val output: String) {
+object CalendariEscolar {
+    var dataIniciStr: String = ""
+    var dataFinalStr: String = ""
+    private val fitxerNoLectius: String = "no_lectius.dat"
+    var horariJson: String = ""
+    var output: String = ""
+    private var dataInici: LocalDate = LocalDate.now()
+    private var dataFinal: LocalDate = LocalDate.now()
+
     private val NO_LECTIUS = mutableListOf<LocalDate>()
     private val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-    val dataInici: LocalDate = LocalDate.parse(dataIniciStr, formatter)
-    val dataFinal: LocalDate = LocalDate.parse(dataFinalStr, formatter)
 
-    init {
+    fun build(): Unit {
+        if (dataIniciStr.isEmpty() or dataIniciStr.isBlank()) throw java.lang.IllegalArgumentException("Falta data inici curs")
+        if (dataFinalStr.isEmpty() or dataFinalStr.isBlank()) throw java.lang.IllegalArgumentException("Falta data final curs")
+        if (horariJson.isEmpty() or horariJson.isBlank()) throw java.lang.IllegalArgumentException("Falta JSON d'entrada")
+        if (output.isEmpty() or output.isBlank()) output = horariJson.substring(0, horariJson.indexOf(".")).plus(".txt")
+        dataInici = LocalDate.parse(dataIniciStr, formatter)
+        dataFinal = LocalDate.parse(dataFinalStr, formatter)
         carregaNoLectius()
         val schedule = parseHorari()
         calculaDatesInicialsFinal(schedule)
-        writeSchedule(schedule, output)
+        writeSchedule(schedule)
+        println("$output creat correctament")
     }
 
     // En principi es el mateix per tots els cicles
     private fun carregaNoLectius() {
-        val path = Paths.get(fitxerNotLectius)
+        val path = Paths.get(fitxerNoLectius)
         if (!Files.exists(path)) {
-            throw IllegalArgumentException("Missing fitxer $fitxerNotLectius!!!")
+            throw IllegalArgumentException("Missing fitxer $fitxerNoLectius!!!")
         }
         Files.readAllLines(path).forEach {
             NO_LECTIUS += LocalDate.parse(it, formatter)
@@ -61,7 +73,7 @@ val fitxerNotLectius: String, val horariJson: String, val output: String) {
         var totalHores = 0
 
         // busquen el primer dia de clase a partir de la data inici
-        while(dataActual.noHiHaDocencia()) dataActual = dataActual.plusDays(1)
+        while (dataActual.noHiHaDocencia()) dataActual = dataActual.plusDays(1)
         var dataRealInici = dataActual
 
         do {
@@ -73,7 +85,7 @@ val fitxerNotLectius: String, val horariJson: String, val output: String) {
                 DayOfWeek.FRIDAY -> if (horesDv != 0) break
             }
             dataRealInici = dataRealInici.plusDays(1)
-        } while(dataRealInici.isBefore(dataFinal))
+        } while (dataRealInici.isBefore(dataFinal))
 
         while (totalHores < horesPerFer) {
 
@@ -153,7 +165,7 @@ val fitxerNotLectius: String, val horariJson: String, val output: String) {
         return gson.fromJson(jsonString, Schedule::class.java)
     }
 
-    fun writeSchedule(schedule: Schedule, output: String): Unit {
+    fun writeSchedule(schedule: Schedule): Unit {
         val buffer = StringBuilder()
 
         schedule.scheduleEntries.forEach { entry ->
@@ -179,13 +191,22 @@ val fitxerNotLectius: String, val horariJson: String, val output: String) {
 
 }
 
-fun main(args: Array<String>) {
-    CalendariEscolar(
-        "20-09-2021",
-        "07-06-2022",
-        "no_lectius.dat",
-        "horari_pep.json",
-        "horari_pep.txt")
-    println("Horari generat")
 
+// ***** DSL *****
+
+// init is a function type with receiver
+fun nouCalendariEscolar(init: CalendariEscolar.() -> Unit): CalendariEscolar {
+    val calendariEscolar = CalendariEscolar
+    calendariEscolar.init()
+    return calendariEscolar
+}
+
+// ***** DSL *****
+
+fun main(args: Array<String>) {
+    nouCalendariEscolar {
+        dataIniciStr = "20-09-2021"
+        dataFinalStr = "07-06-2022"
+        horariJson = "horari_pep.json"
+    }.build()
 }
