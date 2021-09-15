@@ -94,19 +94,19 @@
         {
           "module": "Projecte",
           "name": "PR1",
-          "description": "Projecte Android",
+          "description": "Projecte Android/Kotlin per a dispositius mòbils",
           "hours": "180"
         },
         {
           "module": "Projecte",
           "name": "PR2",
-          "description": "M05 + ERP",
+          "description": "M05 + ERP Empresa",
           "hours": "63"
         },
         {
           "module": "Projecte",
           "name": "PR3",
-          "description": "Projecte Unity",
+          "description": "Projecte Unity per a dispositius mòbils",
           "hours": "36"
         }
       ]

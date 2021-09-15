@@ -6,6 +6,7 @@ import java.nio.file.Paths
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.Month
+import java.time.Period
 import java.time.format.DateTimeFormatter
 
 object CalendariEscolar {
@@ -178,11 +179,13 @@ object CalendariEscolar {
         buffer.append("Docent: ${horariJson.substring(horariJson.indexOf("_") + 1, horariJson.indexOf(".")).capitalize()}\n\n")
         schedule.scheduleEntries.forEach { entry ->
             buffer.append(entry.toString()).append("\n\n")
+            var i = 1
             entry.ufs.forEach { uf ->
-                buffer.append(uf.toString()).append("\n")
-                buffer.append("\tDe ${uf.dataInici.diaDeLaSetmana()} ${formatter.format(uf.dataInici)} a ${uf.dataFinal.diaDeLaSetmana()} ${
+                val period = Period.between(uf.dataInici, uf.dataFinal)
+                buffer.append("${i++}. ").append(uf.toString()).append("\n")
+                buffer.append("\tDe ${uf.dataInici.diaDeLaSetmana()}, ${formatter.format(uf.dataInici)} a ${uf.dataFinal.diaDeLaSetmana()}, ${
                     formatter.format(uf.dataFinal)
-                }").append("\n\n")
+                }").append(""" (${period})""").append("\n\n")
                 if (uf.dataFinal.isAfter(dataFinal)) {
                     val periode = dataFinal.until(uf.dataFinal)
                     buffer.append("*** ${entry.cycle}: la ${uf.name} de ${uf.module} acaba ${periode.days} dies després del final de les classes lectives ${

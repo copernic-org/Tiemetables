@@ -37,6 +37,13 @@ data class UF(
     var dataInici: LocalDate = LocalDate.now()
     var dataFinal: LocalDate = LocalDate.now()
 
+    public fun shortDescription(): String =
+        description
+            .padEnd(30, '.')
+            .substring(0, 30)
+            .plus( if (hours < 100) "..." else "..")
+
+
     override fun toString(): String {
         val buffer = StringBuilder()
         buffer.append("${module} ${name} \"${description}\" ${hours}h.")
@@ -53,7 +60,16 @@ data class ScheduleEntry(
 
     override fun toString(): String {
         val buffer = StringBuilder()
-        buffer.append("${cycle} ${pack} ${day}\n${ufs} ")
+        buffer.append("${cycle} ${pack} ${day}\n\n")
+        var i = 1
+        ufs.forEach { uf ->
+            buffer.append("${i++}. [")
+                .append(uf.module).append(" ")
+                .append(uf.name).append(" ")
+                .append(uf.shortDescription()).append(" ")
+                .append(uf.hours).append("h.")
+                .append("]\n")
+        }
         return buffer.toString()
     }
 }
