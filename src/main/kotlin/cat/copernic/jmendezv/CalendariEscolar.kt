@@ -180,8 +180,10 @@ object CalendariEscolar {
         schedule.scheduleEntries.forEach { entry ->
             buffer.append(entry.toString()).append("\n\n")
             var i = 1
+            var horesPack = 0
             entry.ufs.forEach { uf ->
                 val period = Period.between(uf.dataInici, uf.dataFinal)
+                horesPack += uf.hours
                 buffer.append("${i++}. ").append(uf.toString()).append("\n")
                 buffer.append("\tDe ${uf.dataInici.diaDeLaSetmana()}, ${formatter.format(uf.dataInici)} a ${uf.dataFinal.diaDeLaSetmana()}, ${
                     formatter.format(uf.dataFinal)
@@ -193,6 +195,7 @@ object CalendariEscolar {
                     } ***").append("\n")
                 }
             }
+            buffer.append("\t*** Total ${horesPack} hores, de ${entry.ufs[0].dataInici.diaDeLaSetmana()}, ${formatter.format(entry.ufs[0].dataInici)} a ${entry.ufs[entry.ufs.size - 1].dataFinal.diaDeLaSetmana()}, ${formatter.format(entry.ufs[entry.ufs.size - 1].dataFinal)} (${Period.between(entry.ufs[0].dataInici, entry.ufs[entry.ufs.size - 1].dataFinal)}) ***\n\n")
             buffer.append("******\n\n")
         }
         buffer.append("[EOF]\n")
