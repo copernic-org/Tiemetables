@@ -191,8 +191,19 @@ object CalendariEscolar {
                         ) {
                             dataControl = dataControl.plusDays(1)
                         }
+                        // si es l'ultim control un dia abans de l'ultim dia de classe
                         if (i == uf.controls) {
-                            dataControl = uf.dataFinal
+                            dataControl = uf.dataFinal.minusDays(1)
+                            while (!isDiaDeClasse(
+                                    dataControl,
+                                    entry.day.monday,
+                                    entry.day.tuesday,
+                                    entry.day.wednesday,
+                                    entry.day.thursday,
+                                    entry.day.friday)
+                            ) {
+                                dataControl = dataControl.minusDays(1)
+                            }
                         }
 //                        if (dataControl.isAfter(uf.dataFinal)) {
 //                            dataControl = uf.dataFinal
@@ -244,7 +255,7 @@ object CalendariEscolar {
                     for ((index, control) in uf.llistaControls.withIndex()) {
                         buffer.append("\tControl ${index + 1}. ${control.diaDeLaSetmana()}, ${formatter.format(control)}\n")
                     }
-                    buffer.append("\n\n")
+                    buffer.append("\n")
                 }
                 // Ens passem de rosca
                 if (uf.dataFinal.isAfter(dataFinal)) {
@@ -254,7 +265,7 @@ object CalendariEscolar {
                     } ***").append("\n")
                 }
             }
-            buffer.append("\t*** Total ${horesPack} hores, de ${entry.ufs[0].dataInici.diaDeLaSetmana()}, ${
+            buffer.append("*** Total ${horesPack} hores, de ${entry.ufs[0].dataInici.diaDeLaSetmana()}, ${
                 formatter.format(entry.ufs[0].dataInici)
             } a ${entry.ufs[entry.ufs.size - 1].dataFinal.diaDeLaSetmana()}, ${formatter.format(entry.ufs[entry.ufs.size - 1].dataFinal)} (${
                 Period.between(entry.ufs[0].dataInici,
@@ -270,7 +281,6 @@ object CalendariEscolar {
 
 }
 
-
 // ***** DSL *****
 
 // init is a function type with receiver
@@ -283,7 +293,6 @@ suspend fun nouCalendariEscolar(init: CalendariEscolar.() -> Unit): CalendariEsc
 // ***** DSL *****
 
 fun main(args: Array<String>): Unit = runBlocking {
-
     launch {
         nouCalendariEscolar {
             dataIniciStr = "20-09-2021"

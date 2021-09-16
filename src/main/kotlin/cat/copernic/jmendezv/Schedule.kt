@@ -76,4 +76,4 @@ data class ScheduleEntry(
     }
 }
 
-data class Schedule(@SerializedName("schedule_entry") val scheduleEntries: List<ScheduleEntry> = listOf())
+data class Schedule(@SerializedName("schedule_entry") val scheduleEntries: List<ScheduleEntry>)
