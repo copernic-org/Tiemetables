@@ -292,6 +292,7 @@ suspend fun nouCalendariEscolar(init: CalendariEscolar.() -> Unit): CalendariEsc
 
 // ***** DSL *****
 
+// Dates are in format dd-MM-yyyy
 fun main(args: Array<String>): Unit = runBlocking {
     launch {
         nouCalendariEscolar {
