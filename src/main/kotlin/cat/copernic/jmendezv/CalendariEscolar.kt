@@ -1,6 +1,10 @@
 package cat.copernic.jmendezv
 
 import com.google.gson.GsonBuilder
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.time.DayOfWeek
@@ -210,7 +214,7 @@ object CalendariEscolar {
 // ***** DSL *****
 
 // init is a function type with receiver
-fun nouCalendariEscolar(init: CalendariEscolar.() -> Unit): CalendariEscolar {
+suspend fun nouCalendariEscolar(init: CalendariEscolar.() -> Unit): CalendariEscolar {
     val calendariEscolar = CalendariEscolar
     calendariEscolar.init()
     return calendariEscolar
@@ -218,10 +222,14 @@ fun nouCalendariEscolar(init: CalendariEscolar.() -> Unit): CalendariEscolar {
 
 // ***** DSL *****
 
-fun main(args: Array<String>) {
-    nouCalendariEscolar {
-        dataIniciStr = "20-09-2021"
-        dataFinalStr = "07-06-2022"
-        horariJson = "horari_pep.json"
-    }.build()
+fun main(args: Array<String>): Unit = runBlocking {
+
+    launch {
+        nouCalendariEscolar {
+            dataIniciStr = "20-09-2021"
+            dataFinalStr = "07-06-2022"
+            horariJson = "horari_pep.json"
+        }.build()
+    }
+    println("Please wait...")
 }

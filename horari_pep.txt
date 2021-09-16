@@ -55,23 +55,30 @@ ASIX1 PACKX (132h) dimecres 1h. dijous 1h. divendres 2h.
 
 ******
 
-DAM2 Projecte (279) dilluns 5h. dimecres 4h. 
+DAM2 Projecte (279) dilluns 2h. dimecres 2h. 
 
-1. [Projecte PR1 Projecte Android/Kotlin per a .. 180h.]
-2. [Projecte PR2 M05 + ERP Empresa................ 63h.]
-3. [Projecte PR3 Projecte Unity per a dispositi... 36h.]
+1. [M05 UF2 Optimització del programari...... 20h.]
+2. [Projecte PR1 Projecte Android/Kotlin per a .. 153h.]
+3. [Projecte PR2 M05 + ERP Empresa............... 125h.]
+4. [Projecte PR3 Projecte Unity per a dispositi... 32h.]
 
 
-1. Projecte PR1 "Projecte Android/Kotlin per a dispositius mòbils" 180h.
-	De dilluns, 20-09-2021 a dilluns, 14-03-2022 (P5M22D)
+1. M05 UF2 "Optimització del programari" 20h.
+	De dilluns, 20-09-2021 a dilluns, 25-10-2021 (P1M5D)
 
-2. Projecte PR2 "M05 + ERP Empresa" 63h.
-	De dilluns, 14-03-2022 a dilluns, 09-05-2022 (P1M25D)
+2. Projecte PR1 "Projecte Android/Kotlin per a dispositius mòbils" 153h.
+	De dimecres, 27-10-2021 a dilluns, 05-09-2022 (P10M9D)
 
-3. Projecte PR3 "Projecte Unity per a dispositius mòbils" 36h.
-	De dilluns, 09-05-2022 a dimecres, 01-06-2022 (P23D)
+*** DAM2: la PR1 de Projecte acaba 29 dies després del final de les classes lectives 07-06-2022 ***
+3. Projecte PR2 "M05 + ERP Empresa" 125h.
+	De dilluns, 05-09-2022 a dimecres, 05-04-2023 (P7M)
 
-	*** Total 279 hores, de dilluns, 20-09-2021 a dimecres, 01-06-2022 (P8M12D) ***
+*** DAM2: la PR2 de Projecte acaba 29 dies després del final de les classes lectives 07-06-2022 ***
+4. Projecte PR3 "Projecte Unity per a dispositius mòbils" 32h.
+	De divendres, 07-04-2023 a dimecres, 31-05-2023 (P1M24D)
+
+*** DAM2: la PR3 de Projecte acaba 24 dies després del final de les classes lectives 07-06-2022 ***
+	*** Total 330 hores, de dilluns, 20-09-2021 a dimecres, 31-05-2023 (P1Y8M11D) ***
 
 ******
 

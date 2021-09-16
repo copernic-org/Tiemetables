@@ -15,31 +15,36 @@
           "module": "M07",
           "name": "UF1",
           "description": "Disseny i implementació d'interfícies",
-          "hours": "79"
+          "hours": 79,
+          "controls": 2
         },
         {
           "module": "M08",
           "name": "UF1",
           "description": "Desenvolupament d'aplicacions per a dispositius mòbils",
-          "hours": "45"
+          "hours": 45,
+          "controls": 2
         },
         {
           "module": "M08",
           "name": "UF2",
           "description": "Programació multimèdia",
-          "hours": "24"
+          "hours": "24",
+          "controls": 2
         },
         {
           "module": "M07",
           "name": "UF2",
           "description": "Preparació i distribució d'aplicacions",
-          "hours": "20"
+          "hours": 20,
+          "controls": 2
         },
         {
           "module": "M08",
           "name": "UF3",
           "description": "Desenvolupament de jocs per a dispositius mòbils",
-          "hours": "30"
+          "hours": 30,
+          "controls": 2
         }
       ]
     },
@@ -58,25 +63,29 @@
           "module": "M04",
           "name": "UF1",
           "description": "Programació amb XML",
-          "hours": "45"
+          "hours": 45,
+          "controls": 2
         },
         {
           "module": "M04",
           "name": "UF2",
           "description": "Àmbits d'aplicació de l’XML",
-          "hours": "27"
+          "hours": 27,
+          "controls": 2
         },
         {
           "module": "M04",
           "name": "UF3",
           "description": "Sistemes de gestió empresarial",
-          "hours": "23"
+          "hours": 23,
+          "controls": 2
         },
         {
           "module": "M09",
           "name": "UF1",
           "description": "Llenguatges de guions de servidors (PHP)",
-          "hours": "33"
+          "hours": 33,
+          "controls": 2
         }
       ]
     },
@@ -84,30 +93,40 @@
       "cycle": "DAM2",
       "pack": "Projecte (279)",
       "days": {
-        "monday": 5,
+        "monday": 2,
         "tuesday": 0,
-        "wednesday": 4,
+        "wednesday": 2,
         "thursday": 0,
         "friday": 0
       },
       "ufs": [
         {
+          "module": "M05",
+          "name": "UF2",
+          "description": "Optimització del programari",
+          "hours": 20,
+          "controls": 0
+        },
+        {
           "module": "Projecte",
           "name": "PR1",
           "description": "Projecte Android/Kotlin per a dispositius mòbils",
-          "hours": "180"
+          "hours": 153,
+          "controls": 0
         },
         {
           "module": "Projecte",
           "name": "PR2",
           "description": "M05 + ERP Empresa",
-          "hours": "63"
+          "hours": 125,
+          "controls": 0
         },
         {
           "module": "Projecte",
           "name": "PR3",
           "description": "Projecte Unity per a dispositius mòbils",
-          "hours": "36"
+          "hours": 32,
+          "controls": 0
         }
       ]
     }
