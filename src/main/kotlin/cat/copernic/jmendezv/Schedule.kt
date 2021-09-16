@@ -33,9 +33,11 @@ data class UF(
     @SerializedName("name") var name: String = "",
     @SerializedName("description") var description: String = "",
     @SerializedName("hours") var hours: Int = 0,
+    @SerializedName("controls") var controls: Int = 0,
 ) {
     var dataInici: LocalDate = LocalDate.now()
     var dataFinal: LocalDate = LocalDate.now()
+    var llistaControls: MutableList<LocalDate> = mutableListOf()
 
     public fun shortDescription(): String =
         description

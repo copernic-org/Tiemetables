@@ -50,7 +50,7 @@
     },
     {
       "cycle": "ASIX1",
-      "pack": "PACKX (132h)",
+      "pack": "PACK1 (132h)",
       "days": {
         "monday": 0,
         "tuesday": 0,
@@ -105,28 +105,28 @@
           "name": "UF2",
           "description": "Optimització del programari",
           "hours": 20,
-          "controls": 0
+          "controls": 2
         },
         {
           "module": "Projecte",
           "name": "PR1",
           "description": "Projecte Android/Kotlin per a dispositius mòbils",
           "hours": 153,
-          "controls": 0
+          "controls": 2
         },
         {
           "module": "Projecte",
           "name": "PR2",
           "description": "M05 + ERP Empresa",
           "hours": 125,
-          "controls": 0
+          "controls": 2
         },
         {
           "module": "Projecte",
           "name": "PR3",
           "description": "Projecte Unity per a dispositius mòbils",
           "hours": 32,
-          "controls": 0
+          "controls": 2
         }
       ]
     }

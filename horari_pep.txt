@@ -15,23 +15,43 @@ DAM2 PACK3 (198h) dimarts 2h. dijous 3h. divendres 2h.
 1. M07 UF1 "Disseny i implementació d'interfícies" 79h.
 	De dimarts, 21-09-2021 a divendres, 10-12-2021 (P2M19D)
 
+	Control 1. dimarts, 02-11-2021
+	Control 2. divendres, 10-12-2021
+
+
 2. M08 UF1 "Desenvolupament d'aplicacions per a dispositius mòbils" 45h.
 	De divendres, 10-12-2021 a dijous, 10-02-2022 (P2M)
+
+	Control 1. dimarts, 11-01-2022
+	Control 2. dijous, 10-02-2022
+
 
 3. M08 UF2 "Programació multimèdia" 24h.
 	De divendres, 11-02-2022 a dijous, 10-03-2022 (P27D)
 
+	Control 1. dijous, 24-02-2022
+	Control 2. dijous, 10-03-2022
+
+
 4. M07 UF2 "Preparació i distribució d'aplicacions" 20h.
 	De dijous, 10-03-2022 a divendres, 25-03-2022 (P15D)
 
+	Control 1. dijous, 17-03-2022
+	Control 2. divendres, 25-03-2022
+
+
 5. M08 UF3 "Desenvolupament de jocs per a dispositius mòbils" 30h.
 	De divendres, 25-03-2022 a dijous, 05-05-2022 (P1M10D)
+
+	Control 1. dimarts, 19-04-2022
+	Control 2. dijous, 05-05-2022
+
 
 	*** Total 198 hores, de dimarts, 21-09-2021 a dijous, 05-05-2022 (P7M14D) ***
 
 ******
 
-ASIX1 PACKX (132h) dimecres 1h. dijous 1h. divendres 2h. 
+ASIX1 PACK1 (132h) dimecres 1h. dijous 1h. divendres 2h. 
 
 1. [M04 UF1 Programació amb XML.............. 45h.]
 2. [M04 UF2 Àmbits d'aplicació de l’XML...... 27h.]
@@ -42,14 +62,30 @@ ASIX1 PACKX (132h) dimecres 1h. dijous 1h. divendres 2h.
 1. M04 UF1 "Programació amb XML" 45h.
 	De dimecres, 22-09-2021 a dijous, 09-12-2021 (P2M17D)
 
+	Control 1. dimecres, 03-11-2021
+	Control 2. dijous, 09-12-2021
+
+
 2. M04 UF2 "Àmbits d'aplicació de l’XML" 27h.
 	De divendres, 10-12-2021 a divendres, 11-02-2022 (P2M1D)
+
+	Control 1. dimecres, 12-01-2022
+	Control 2. divendres, 11-02-2022
+
 
 3. M04 UF3 "Sistemes de gestió empresarial" 23h.
 	De dimecres, 16-02-2022 a divendres, 25-03-2022 (P1M9D)
 
+	Control 1. dimecres, 09-03-2022
+	Control 2. divendres, 25-03-2022
+
+
 4. M09 UF1 "Llenguatges de guions de servidors (PHP)" 33h.
 	De divendres, 25-03-2022 a dimecres, 01-06-2022 (P2M7D)
+
+	Control 1. dimecres, 27-04-2022
+	Control 2. dimecres, 01-06-2022
+
 
 	*** Total 128 hores, de dimecres, 22-09-2021 a dimecres, 01-06-2022 (P8M10D) ***
 
@@ -66,16 +102,32 @@ DAM2 Projecte (279) dilluns 2h. dimecres 2h.
 1. M05 UF2 "Optimització del programari" 20h.
 	De dilluns, 20-09-2021 a dilluns, 25-10-2021 (P1M5D)
 
+	Control 1. dimecres, 13-10-2021
+	Control 2. dilluns, 25-10-2021
+
+
 2. Projecte PR1 "Projecte Android/Kotlin per a dispositius mòbils" 153h.
 	De dimecres, 27-10-2021 a dilluns, 05-09-2022 (P10M9D)
+
+	Control 1. dimecres, 30-03-2022
+	Control 2. dilluns, 05-09-2022
+
 
 *** DAM2: la PR1 de Projecte acaba 29 dies després del final de les classes lectives 07-06-2022 ***
 3. Projecte PR2 "M05 + ERP Empresa" 125h.
 	De dilluns, 05-09-2022 a dimecres, 05-04-2023 (P7M)
 
+	Control 1. dilluns, 19-12-2022
+	Control 2. dimecres, 05-04-2023
+
+
 *** DAM2: la PR2 de Projecte acaba 29 dies després del final de les classes lectives 07-06-2022 ***
 4. Projecte PR3 "Projecte Unity per a dispositius mòbils" 32h.
 	De divendres, 07-04-2023 a dimecres, 31-05-2023 (P1M24D)
+
+	Control 1. dilluns, 08-05-2023
+	Control 2. dimecres, 31-05-2023
+
 
 *** DAM2: la PR3 de Projecte acaba 24 dies després del final de les classes lectives 07-06-2022 ***
 	*** Total 330 hores, de dilluns, 20-09-2021 a dimecres, 31-05-2023 (P1Y8M11D) ***

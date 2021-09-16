@@ -69,6 +69,28 @@ object CalendariEscolar {
             year.toString().substring(2, 4)
         }"
 
+    private fun isDiaDeClasse(
+        data: LocalDate = dataInici,
+        horesDl: Int = 0,
+        horesDm: Int = 0,
+        horesDx: Int = 0,
+        horesDj: Int = 0,
+        horesDv: Int = 0,
+    ): Boolean {
+
+        // Caps de setmana i dies no lectius
+        if (data.noHiHaDocencia()) return false
+
+        when (data.dayOfWeek) {
+            DayOfWeek.MONDAY -> if (horesDl != 0) return true
+            DayOfWeek.TUESDAY -> if (horesDm != 0) return true
+            DayOfWeek.WEDNESDAY -> if (horesDx != 0) return true
+            DayOfWeek.THURSDAY -> if (horesDj != 0) return true
+            DayOfWeek.FRIDAY -> if (horesDv != 0) return true
+        }
+        return false
+    }
+
     // Retrona un triple perque la data d'inici pot no ser lectiva per a aquesta uf
     private fun calculaIniciFinalUf(
         inici: LocalDate = dataInici,
@@ -136,10 +158,6 @@ object CalendariEscolar {
                     day.wednesday,
                     day.thursday,
                     day.friday)
-                // pair.first = data final, pair.second les hores reals que ha sumat, poden ser més de les necessàries
-                if (triple.third > hours) {
-//                    println("s'han adjudicat ${pair.second - hours} hores de mes" )
-                }
                 df = triple.second
                 uf.dataInici = triple.first
                 uf.dataFinal = df
@@ -155,6 +173,33 @@ object CalendariEscolar {
                     horesAcumulades = triple.third - hours
                 }
 
+                if (uf.controls > 0) {
+                    val period = Period.between(uf.dataInici, uf.dataFinal)
+                    val dies = period.months * 30 + period.days
+                    val parts = dies / uf.controls
+                    uf.llistaControls = mutableListOf()
+
+                    for (i in 1..uf.controls) {
+                        var dataControl = uf.dataInici.plusDays(parts.toLong() * i)
+                        while (!isDiaDeClasse(
+                                dataControl,
+                                entry.day.monday,
+                                entry.day.tuesday,
+                                entry.day.wednesday,
+                                entry.day.thursday,
+                                entry.day.friday)
+                        ) {
+                            dataControl = dataControl.plusDays(1)
+                        }
+                        if (i == uf.controls) {
+                            dataControl = uf.dataFinal
+                        }
+//                        if (dataControl.isAfter(uf.dataFinal)) {
+//                            dataControl = uf.dataFinal
+//                        }
+                        uf.llistaControls.add(dataControl)
+                    }
+                }
             }
         }
     }
@@ -180,7 +225,9 @@ object CalendariEscolar {
         val buffer = StringBuilder()
 
         buffer.append("CURS ${LocalDate.now().cursActual()}\n").append("============\n\n")
-        buffer.append("Docent: ${horariJson.substring(horariJson.indexOf("_") + 1, horariJson.indexOf(".")).capitalize()}\n\n")
+        buffer.append("Docent: ${
+            horariJson.substring(horariJson.indexOf("_") + 1, horariJson.indexOf(".")).capitalize()
+        }\n\n")
         schedule.scheduleEntries.forEach { entry ->
             buffer.append(entry.toString()).append("\n\n")
             var i = 1
@@ -192,6 +239,14 @@ object CalendariEscolar {
                 buffer.append("\tDe ${uf.dataInici.diaDeLaSetmana()}, ${formatter.format(uf.dataInici)} a ${uf.dataFinal.diaDeLaSetmana()}, ${
                     formatter.format(uf.dataFinal)
                 }").append(""" (${period})""").append("\n\n")
+                // dates controls
+                if (uf.controls > 0) {
+                    for ((index, control) in uf.llistaControls.withIndex()) {
+                        buffer.append("\tControl ${index + 1}. ${control.diaDeLaSetmana()}, ${formatter.format(control)}\n")
+                    }
+                    buffer.append("\n\n")
+                }
+                // Ens passem de rosca
                 if (uf.dataFinal.isAfter(dataFinal)) {
                     val periode = dataFinal.until(uf.dataFinal)
                     buffer.append("*** ${entry.cycle}: la ${uf.name} de ${uf.module} acaba ${periode.days} dies després del final de les classes lectives ${
@@ -199,7 +254,12 @@ object CalendariEscolar {
                     } ***").append("\n")
                 }
             }
-            buffer.append("\t*** Total ${horesPack} hores, de ${entry.ufs[0].dataInici.diaDeLaSetmana()}, ${formatter.format(entry.ufs[0].dataInici)} a ${entry.ufs[entry.ufs.size - 1].dataFinal.diaDeLaSetmana()}, ${formatter.format(entry.ufs[entry.ufs.size - 1].dataFinal)} (${Period.between(entry.ufs[0].dataInici, entry.ufs[entry.ufs.size - 1].dataFinal)}) ***\n\n")
+            buffer.append("\t*** Total ${horesPack} hores, de ${entry.ufs[0].dataInici.diaDeLaSetmana()}, ${
+                formatter.format(entry.ufs[0].dataInici)
+            } a ${entry.ufs[entry.ufs.size - 1].dataFinal.diaDeLaSetmana()}, ${formatter.format(entry.ufs[entry.ufs.size - 1].dataFinal)} (${
+                Period.between(entry.ufs[0].dataInici,
+                    entry.ufs[entry.ufs.size - 1].dataFinal)
+            }) ***\n\n")
             buffer.append("******\n\n")
         }
         buffer.append("[EOF]\n")
